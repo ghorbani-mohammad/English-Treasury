@@ -23,6 +23,39 @@ services:
     command: ["python", "/app/treasury/manage.py", "runserver", "0:80"]
     env_file:
       - .env
+  
+  treasury_worker:
+    container_name: treasury_worker
+    build: .
+    working_dir: /app/treasury
+    command: ["celery", "-A", "treasury", "worker", "-l", "info"]
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    depends_on:
+      - treasury_db
+      - treasury_redis
+    env_file:
+      - .env
+
+  treasury_beat:
+    container_name: treasury_beat
+    build: .
+    working_dir: /app/treasury
+    command: ["celery", "-A", "treasury", "beat", "-l", "info"]
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    depends_on:
+      - treasury_db
+      - treasury_redis
+    env_file:
+      - .env
+
+  treasury_redis:
+    container_name : treasury_redis
+    image: redis:6.2-alpine
+    restart: unless-stopped
 
 volumes:
   treasury_db:
