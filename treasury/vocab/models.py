@@ -1,3 +1,7 @@
 from django.db import models
 
-# Create your models here.
+from reusable.models import BaseModel
+
+
+class Vocabulary(BaseModel):
+    expression = models.CharField(max_length=20)
