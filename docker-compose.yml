@@ -20,7 +20,7 @@ services:
       - ./static:/app/treasury/static
     ports:
       - "127.0.0.1:8035:80"
-    command: ["sleep", "1000"]
+    command: ["python", "/app/treasury/manage.py", "runserver", "0:80"]
     env_file:
       - .env
 
