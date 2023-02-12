@@ -17,7 +17,9 @@ class Vocabulary(BaseModel):
         created = self.pk is None
         if created:
             source_api = VocabularyAPI()
-            self.short_description, self.long_description = source_api.get_definitions()
+            self.short_description, self.long_description = source_api.get_definitions(
+                self.expression
+            )
         super().save(*args, **kwargs)
 
 
