@@ -1,7 +1,7 @@
-### This is a vocabulary or expression treasury for you.
+#### This is a vocabulary or expression treasury for you.
 
 
-### Django Admin Panel:
+#### Django Admin Panel:
 You can have a look at its Django admin by guest user provided at below.
 
 - Link:
