@@ -8,9 +8,9 @@ class VocabularyAPI:
     def get_short_description(self, word):
         resp = requests.get(f"{self.URL}/dictionary/{word}")
         doc = BS(resp.text, "html.parser")
-        return doc.find("p", {"class": "short"})
+        return doc.find("p", {"class": "short"}).text
 
     def get_long_description(self, word):
         resp = requests.get(f"{self.URL}/dictionary/{word}")
         doc = BS(resp.text, "html.parser")
-        return doc.find("p", {"class": "long"})
+        return doc.find("p", {"class": "long"}).text
