@@ -2,6 +2,7 @@ from django.db import models
 
 from user.models import Profile
 from reusable.models import BaseModel
+from sources.vocabulary import VocabularyAPI
 
 
 class Vocabulary(BaseModel):
@@ -11,6 +12,13 @@ class Vocabulary(BaseModel):
 
     class Meta:
         verbose_name_plural = "Vocabularies"
+
+    def save(self, *args, **kwargs):
+        created = self.pk is None
+        if created:
+            source_api = VocabularyAPI()
+            self.short_description, self.long_description = source_api.get_definitions()
+        super().save(*args, **kwargs)
 
 
 class ProfileVocabulary(BaseModel):
