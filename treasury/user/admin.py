@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from . import models
+from reusable.admins import ReadOnlyAdminDateFieldsMIXIN
+
+
+@admin.register(models.Profile)
+class ProfileAdmin(ReadOnlyAdminDateFieldsMIXIN, admin.ModelAdmin):
+    list_display = ("pk", "user", "created_at")
