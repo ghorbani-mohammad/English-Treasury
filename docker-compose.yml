@@ -1,0 +1,28 @@
+services:
+  treasury_db:
+    container_name: treasury_db
+    image: postgres:15.2-alpine
+    restart: unless-stopped
+    volumes:
+      - treasury_db:/var/lib/postgresql/data
+    env_file:
+      - .env
+    shm_size: 1gb
+  
+  treasury_api:
+    container_name: treasury_api
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - treasury_db
+    volumes:
+      - .:/app
+      - ./static:/app/treasury/static
+    ports:
+      - "127.0.0.1:8035:80"
+    command: ["python", "/app/treasury/manage.py", "runserver", "0:80"]
+    env_file:
+      - .env
+
+volumes:
+  treasury_db:
