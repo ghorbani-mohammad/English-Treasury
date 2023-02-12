@@ -3,3 +3,5 @@ celery
 envparse
 redis
 psycopg2
+requests
+beautifulsoup4
