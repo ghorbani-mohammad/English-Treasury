@@ -6,11 +6,7 @@ from envparse import env
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-jm36i3(uk3^*i!7x$-w$a0a&2i*(3=4^18rrk3o)j99kmay$s#"
+SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG")
 
